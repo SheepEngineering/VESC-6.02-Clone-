@@ -111,6 +111,50 @@ typedef enum {
 	FAULT_CODE_PHASE_FILTER,
 } mc_fault_code;
 
+typedef enum {
+	BMS_OP_STATE_UNKNOWN = 0,
+        BMS_OP_STATE_INIT,		// 1
+	BMS_OP_STATE_CHARGING,		// 2
+	BMS_OP_STATE_PRE_CHARGE,		// 3
+	BMS_OP_STATE_LOAD_ENABLED,		// 4
+	BMS_OP_STATE_BATTERY_DEAD,		// 5
+	BMS_OP_STATE_IDLE,			// 6
+	BMS_OP_STATE_EXTERNAL,		// 7
+	BMS_OP_STATE_ERROR,			// 8
+	BMS_OP_STATE_ERROR_PRECHARGE,	// 9
+	BMS_OP_STATE_BALANCING,		// 10
+	BMS_OP_STATE_CHARGED,		// 11
+	BMS_OP_STATE_FORCEON,		// 12
+} bms_op_state;
+
+typedef struct {
+	float v_tot;
+	float v_charge;
+	float i_in;
+	float i_in_ic;
+	float ah_cnt;
+	float wh_cnt;
+	int cell_num;
+	float v_cell[32];
+	bool bal_state[32];
+	int temp_adc_num;
+	float temps_adc[50];
+	float temp_ic;
+	float temp_hum;
+	float hum;
+	float temp_max_cell;
+	float soc;
+	float soh;
+	int can_id;
+	float ah_cnt_chg_total;
+	float wh_cnt_chg_total;
+	float ah_cnt_dis_total;
+	float wh_cnt_dis_total;
+	systime_t update_time;
+	bms_op_state op_state;
+	bms_fault_state fault_state;
+} bms_values;
+
 typedef union {
 	uint32_t as_u32;
 	int32_t as_i32;
@@ -609,6 +653,15 @@ typedef struct {
 	// Unblock unboxed
 	bool (*lbm_unblock_ctx_unboxed)(lbm_cid cid, lbm_value unboxed);
 
+	// FW/HW Info
+	void (*get_fw_version)(int *vmajor, int *vminor, int *vtest);
+	const char* (*get_fw_name)(void);
+	const char* (*get_hw_name)(void);
+
+	// BMS
+	bms_fault_state (*bms_get_fault_state)(void);
+	bms_op_state (*bms_get_op_state)(void);
+	volatile bms_values* (*bms_get_values)(void);
 } vesc_c_if;
 
 typedef struct {
