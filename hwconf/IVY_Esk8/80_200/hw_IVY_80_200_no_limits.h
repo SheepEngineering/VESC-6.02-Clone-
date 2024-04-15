@@ -17,11 +17,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef HW_MKSESC_84_200_HP_NO_LIMITS_H_
-#define HW_MKSESC_84_200_HP_NO_LIMITS_H_
+#ifndef HW_IVY_80_200_NO_LIMITS_H_
+#define HW_IVY_80_200_NO_LIMITS_H_
 
 #define DISABLE_HW_LIMITS
 
-#include "hw_mksesc_84_200_hp.h"
+#include "hw_IVY_80_200.h"
 
-#endif /* HW_MKSESC_84_200_HP_NO_LIMITS_H_ */
+#endif /* HW_IVY_80_200_NO_LIMITS_H_ */
