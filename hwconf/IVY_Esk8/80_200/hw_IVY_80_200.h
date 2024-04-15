@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef HW_hw_IVY_80_200_H_
+#ifndef HW_IVY_80_200_H_
 
-#define HW_hw_IVY_80_200_H_
+#define HW_IVY_80_200_H_
 
 #define HW_NAME "IVY_80_200"
 
@@ -333,4 +333,4 @@
 // HW-specific functions
 // float hwIVY_80_200_get_temp(void);
 bool hw_sample_shutdown_button(void);
-#endif /* HW_hw_IVY_80_200_H_ */
+#endif /* HW_IVY_80_200_H_ */
