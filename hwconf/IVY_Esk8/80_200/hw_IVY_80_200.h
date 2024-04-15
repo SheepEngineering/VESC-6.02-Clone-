@@ -93,11 +93,6 @@
     palSetPadMode(HW_SHUTDOWN_GPIO, HW_SHUTDOWN_PIN, PAL_MODE_OUTPUT_PUSHPULL); \
     HW_SHUTDOWN_HOLD_ON();
 
-// #define AUX_GPIO GPIOC
-// #define AUX_PIN 12
-// #define AUX_ON() palSetPad(AUX_GPIO, AUX_PIN)
-// #define AUX_OFF() palClearPad(AUX_GPIO, AUX_PIN)
-
 #ifdef HW_HAS_CURR_FILTERS
 #define CURRENT_FILTER_ON() palSetPad(GPIOD, 2)
 #define CURRENT_FILTER_OFF() palClearPad(GPIOD, 2)
@@ -142,8 +137,6 @@
 #define ADC_IND_EXT2 7
 #define ADC_IND_SHUTDOWN 10
 #define ADC_IND_TEMP_MOS 8
-// #define ADC_IND_TEMP_MOS_2 15
-// #define ADC_IND_TEMP_MOS_3 16
 #define ADC_IND_TEMP_MOTOR 9
 #define ADC_IND_VREFINT 12
 
@@ -174,9 +167,7 @@
 
 // NTC Termistors
 // #define NTC_RES(adc_val) ((4095.0 * 10000.0) / adc_val - 10000.0)
-// #define NTC_TEMP(adc_ind) hwIVY_80_200_get_temp()
 #define NTC_RES(adc_val) ((4095.0 * 10000.0) / adc_val - 10000.0)
-// #define NTC_TEMP(adc_ind) (1.0 / ((logf(NTC_RES(ADC_Value[adc_ind]) / 10000.0) / 3435.0) + (1.0 / 298.15)) - 273.15)
 #define NTC_TEMP(adc_ind) (1.0 / ((logf(NTC_RES(ADC_Value[adc_ind]) / 100000.0) / 3435.0) + (1.0 / 298.15)) - 273.15)
 
 #define NTC_RES_MOTOR(adc_val) (10000.0 / ((4095.0 / (float)adc_val) - 1.0)) // Motor temp sensor on low side
@@ -219,21 +210,6 @@
 #define HW_UART_P_TX_PIN 10
 #define HW_UART_P_RX_PORT GPIOC
 #define HW_UART_P_RX_PIN 11
-
-// BMI160
-// #define BMI160_SDA_GPIO GPIOB
-// #define BMI160_SDA_PIN 2
-// #define BMI160_SCL_GPIO GPIOA
-// #define BMI160_SCL_PIN 15
-// #define IMU_FLIP
-// #define IMU_ROT_180
-
-// Disable, consider upgrading later
-// NRF SWD
-// #define NRF5x_SWDIO_GPIO		GPIOA
-// #define NRF5x_SWDIO_PIN			15
-// #define NRF5x_SWCLK_GPIO		GPIOB
-// #define NRF5x_SWCLK_PIN			3
 
 // ICU Peripheral for servo decoding
 #define HW_USE_SERVO_TIM4
@@ -331,6 +307,5 @@
 #define HW_LIM_TEMP_FET -40.0, 110.0
 
 // HW-specific functions
-// float hwIVY_80_200_get_temp(void);
 bool hw_sample_shutdown_button(void);
 #endif /* HW_IVY_80_200_H_ */
